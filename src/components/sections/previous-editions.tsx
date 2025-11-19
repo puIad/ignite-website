@@ -3,7 +3,7 @@ import { Logos } from "../ui/logos";
 
 export function PreviousEditionsSection() {
   return (
-    <div className="relative min-h-screen bg-primary w-screen text-white px-8 py-4 lg:px-20 lg:py-12">
+    <div id="previous-editions" className="relative min-h-screen bg-primary w-screen text-white px-8 py-4 lg:px-20 lg:py-12">
       <img src="/images/image-to-blend.png" className="mix-blend-multiply absolute top-0 left-0 z-10 h-full object-cover" />
 
 

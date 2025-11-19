@@ -64,11 +64,43 @@
     font-weight: 400;
     font-style: normal;
   }
+
+  /* Madani Arabic (Light) */
+  @font-face {
+    font-family: "Madani";
+    src: url("/fonts/Madani Arabic Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  /* Madani Arabic (Regular/Medium) */
+  @font-face {
+    font-family: "Madani";
+    src: url("/fonts/Madani Arabic Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  /* Madani Arabic (Extra Bold) */
+  @font-face {
+    font-family: "Madani";
+    src: url("/fonts/Madani Arabic Extra Bold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+  }
 }
 
 @layer utilities {
   body {
     @apply font-sans
+  }
+
+  /* Apply Madani only to elements explicitly marked as Arabic (lang="ar").
+     We avoid setting the global html lang so the whole page doesn't switch fonts.
+     The speakers-registration component sets dir="rtl" on the form wrapper when needed; individual elements
+     that contain Arabic text get lang="ar" so only they use the Madani typeface. */
+  [lang="ar"] {
+    font-family: "Madani", var(--font-sans) !important;
   }
 }
 

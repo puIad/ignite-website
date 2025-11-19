@@ -8,6 +8,7 @@ import {
   formStore,
   type SchemaPartOne,
 } from "./schema";
+import { uiTexts } from "./schema";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 
@@ -336,7 +337,7 @@ export function FormOne() {
                         onBlur={field.handleBlur}
                         className="flex flex-row gap-6 text-[14px] lg:text-[16px]"
                       >
-                        <div className="flex items-center space-x-2">
+                        <label className="flex items-center space-x-2 cursor-pointer">
                           <RadioGroupItem
                             onClick={(e) => {
                               console.log('form errors : ', form.getAllErrors())
@@ -347,9 +348,9 @@ export function FormOne() {
                             value="yes"
                             id="option-yes"
                           />
-                          <Label className="pt-1.5">Yes</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
+                          <span className="pt-1.5">{uiTexts[lang ?? 'EN'].yes}</span>
+                        </label>
+                        <label className="flex items-center space-x-2 cursor-pointer">
                           <RadioGroupItem
                             onClick={(e) => {
                               field.handleChange(
@@ -359,8 +360,8 @@ export function FormOne() {
                             value="no"
                             id="option-no"
                           />
-                          <Label className="pt-1.5">No</Label>
-                        </div>
+                          <span className="pt-1.5">{uiTexts[lang ?? 'EN'].no}</span>
+                        </label>
                       </RadioGroup>
 
                       <FieldInfo field={field} />
@@ -465,10 +466,11 @@ export function FormOne() {
 
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 mt-10">
             <button
+              type="button"
               className="text-[14px] lg:text-[16px] px-4 py-2.75 lg:px-10 lg:py-3 rounded-xl lg:rounded-2xl text-bold bg-primary/5 border-primary/30 border flex gap-4 items-center text-primary font-bold uppercase"
               onClick={() => setStep(0)}
             >
-              Go Back
+              {uiTexts[lang ?? 'EN'].goBack}
               <div className="rotate-180">
                 <Arrow fill="#750B2B" />
               </div>

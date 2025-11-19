@@ -4,7 +4,7 @@ import { Navbar } from "../ui/navbar"
 
 export function WhatIsIgniteSection() {
   return (
-    <div className="relative w-full min-h-screen">
+  <div id="what-is-ignite" className="relative w-full min-h-screen">
       <img src="/images/noisy-red-mobile.webp" className="absolute lg:hidden h-full object-cover top-0 left-0 -z-10" />
       <img src="/images/noisy-red-desktop.webp" className="absolute hidden h-full object-cover top-0 left-0 lg:inline -z-10" />
 

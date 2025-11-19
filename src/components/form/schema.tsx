@@ -29,9 +29,9 @@ type Fields =
 export const fieldsData = {
   email: {
     label: {
-      EN: "Email",
+      EN: "Email Adress",
       AR: "البريد الإلكتروني",
-      FR: "Email",
+      FR: "Adresse Email",
     },
     placeholder: {
       EN: "Enter your email address",
@@ -41,7 +41,7 @@ export const fieldsData = {
   },
   first_name: {
     label: {
-      EN: "First name",
+      EN: "First Name",
       AR: "الاسم",
       FR: "Prénom",
     },
@@ -53,7 +53,7 @@ export const fieldsData = {
   },
   last_name: {
     label: {
-      EN: "Family name",
+      EN: "Family Name",
       AR: "اللقب",
       FR: "Nom",
     },
@@ -89,9 +89,9 @@ export const fieldsData = {
   },
   date_of_birth: {
     label: {
-      EN: "Date of birth",
+      EN: "Date of Birth",
       AR: "تاريخ الميلاد",
-      FR: "Date de naissance",
+      FR: "Date de Naissance",
     },
     placeholder: {
       EN: "Select your date of birth",
@@ -113,9 +113,9 @@ export const fieldsData = {
   },
   is_student: {
     label: {
-      EN: "Are you a student ?",
+      EN: "Are you a student?",
       AR: "هل أنت طالب؟",
-      FR: "Etes vous un(e) étudiant(e) ?",
+      FR: "Êtes vous un(e) étudiant(e)?",
     },
     placeholder: {
       EN: "",
@@ -125,21 +125,21 @@ export const fieldsData = {
   },
   university: {
     label: {
-      EN: "University",
-      AR: "ما هي جامعتك/ مدرستك؟",
-      FR: "Quelle est votre Université / Ecole ?",
+      EN: "School/University",
+      AR: "ما هي جامعتك/مدرستك؟",
+      FR: "Université/École",
     },
     placeholder: {
-      EN: "Enter your university name",
+      EN: "Enter your university or school's name",
       AR: "أدخل اسم جامعتك أو مدرستك",
       FR: "Entrez le nom de votre université ou école",
     },
   },
   degree_and_major: {
     label: {
-      EN: "Degree and Major",
+      EN: "Year of studies and Major",
       AR: "السنة والتخصص",
-      FR: "Année et spécialité ?",
+      FR: "Année et spécialité",
     },
     placeholder: {
       EN: "Enter your degree and major",
@@ -150,8 +150,8 @@ export const fieldsData = {
   occupation: {
     label: {
       EN: "Occupation",
-      AR: "ماذا تمتهن ؟",
-      FR: "Quelle est votre occupation ?",
+      AR: "المهنة",
+      FR: "Occupation",
     },
     placeholder: {
       EN: "Enter your occupation",
@@ -161,21 +161,21 @@ export const fieldsData = {
   },
   knowledge_about_ignite: {
     label: {
-      EN: "What do you know about Ignite Talks?",
-      AR: '؟"Ignite Talks" ما الذي تعرفه عن',
-      FR: "Que connaissez-vous à propos d'Ignite Talks ?",
+      EN: "What do you know about Ignite® Talks?",
+      AR: 'ماذا تعرف عن "Ignite® Talks"؟',
+      FR: "Que connaissez-vous à propos d'Ignite® Talks ?",
     },
     placeholder: {
-      EN: "Tell us what you know about Ignite Talks",
-      AR: "أخبرنا بما تعرفه عن Ignite Talks",
-      FR: "Dites-nous ce que vous savez sur Ignite Talks",
+      EN: "Tell us what you know about Ignite® Talks",
+      AR: "أخبرنا بما تعرفه عن Ignite® Talks",
+      FR: "Dites-nous ce que vous savez sur Ignite® Talks",
     },
   },
   motivation: {
     label: {
-      EN: "What motivated you to be a speaker at Ignite Algiers?",
-      AR: "ما الذي دفعك للمشاركة في هذا الحدث؟",
-      FR: "Qu'est-ce qui vous a motivé à être un speaker dans Ignite Algiers ?",
+      EN: "What motivated you to be a speaker at Ignite® Algiers?",
+      AR: 'ما الذي دفعك للمشاركة في "Ignite® Algiers"؟',
+      FR: "Qu'est-ce qui vous a motivé à être un speaker dans Ignite® Algiers ?",
     },
     placeholder: {
       EN: "Tell us what motivated you",
@@ -185,8 +185,8 @@ export const fieldsData = {
   },
   how_heard: {
     label: {
-      EN: "How did you hear about Ignite Algiers?",
-      AR: '؟"Ignite Algiers" من اين عرفت عن',
+      EN: "How did you hear about Ignite® Algiers?",
+      AR: 'كيف سمعت ب"Ignite® Algiers"؟',
       FR: "Comment avez-vous entendu parler d'Ignite Algiers ?",
     },
     placeholder: {
@@ -323,37 +323,95 @@ export function formatError(str: string): string {
 
 export const fieldsErrors = {
   required: (fieldName: string, lang: Lang) => {
-    fieldName = formatError(fieldName);
+    // prefer localized field label when available
+  const l = lang ?? "EN";
+  const label = (fieldsData as any)[fieldName]?.label?.[l] ?? formatError(fieldName);
     switch (lang) {
       case "EN":
-        return `${fieldName} is required`;
+        return `${label} is required`;
       case "FR":
-        return `${fieldName} is required`;
+        return `${label} est requis`;
       case "AR":
-        return `${fieldName} is required`;
+        return `${label} مطلوب`;
     }
   },
   invalid: (fieldName: string, lang: Lang) => {
-    fieldName = formatError(fieldName);
+  const l = lang ?? "EN";
+  const label = (fieldsData as any)[fieldName]?.label?.[l] ?? formatError(fieldName);
     switch (lang) {
       case "EN":
-        return `invalid ${fieldName}`;
+        return `invalid ${label}`;
       case "FR":
-        return `invalid ${fieldName}`;
+        return `${label} invalide`;
       case "AR":
-        return `${fieldName} is required`;
+        return `غير صالح ${label}`;
     }
   },
   tooShort: (min: number, fieldName: string, lang: Lang) => {
-    fieldName = formatError(fieldName);
+  const l = lang ?? "EN";
+  const label = (fieldsData as any)[fieldName]?.label?.[l] ?? formatError(fieldName);
     switch (lang) {
       case "EN":
-        return `${fieldName} should be at least ${min} characters`;
+        return `${label} should be at least ${min} characters`;
       case "FR":
-        return `${fieldName} should be at least ${min} characters`;
+        return `${label} doit contenir au moins ${min} caractères`;
       case "AR":
-        return `${fieldName} should be at least ${min} characters`;
+        return `${label} يجب أن تكون على الأقل ${min} أحرف`;
     }
+  },
+} as const;
+
+export const uiTexts = {
+  EN: {
+    chooseLanguage: "Choose a Language",
+    nextStep: "Next Step",
+    goBack: "Go Back",
+    speakersRegistration: "Speakers Registration",
+    yes: "Yes",
+    no: "No",
+    online: "Online",
+    inPerson: "In Person",
+    sending: "Sending...",
+    howHeard_social_media: "Through your social media platforms",
+    howHeard_friend: "Through a friend",
+    howHeard_other: "Other",
+    duo_yes_with_partner: "Yes, I already have a partner to do the talk with.",
+    duo_no_solo: "No, I will lead the talk on my own.",
+    duo_no_but_open: "No, but I am open to pairing with someone whose topic aligns with mine.",
+  },
+  FR: {
+    chooseLanguage: "Choisissez une langue",
+    nextStep: "Étape suivante",
+    goBack: "Retour",
+    speakersRegistration: "Inscription des Speakers",
+    yes: "Oui",
+    no: "Non",
+    online: "En ligne",
+    inPerson: "En personne",
+    sending: "Envoi...",
+    howHeard_social_media: "Via vos réseaux sociaux",
+    howHeard_friend: "Via un ami",
+    howHeard_other: "Autre",
+  duo_yes_with_partner: "Oui, j'ai déjà un partenaire pour faire la présentation.",
+  duo_no_solo: "Non, je présenterai seul(e).",
+  duo_no_but_open: "Non, mais je suis ouvert(e) à m'associer avec quelqu'un dont le sujet est compatible.",
+  },
+  AR: {
+    chooseLanguage: "اختر اللغة",
+    nextStep: "الخطوة التالية",
+    goBack: "العودة",
+    speakersRegistration: "تسجيل المتحدثين",
+    yes: "نعم",
+    no: "لا",
+    online: "عبر الانترنت",
+    inPerson: "حضوري",
+    sending: "جاري الإرسال...",
+    howHeard_social_media: "من خلال منصات التواصل الاجتماعي الخاصة بك",
+    howHeard_friend: "من خلال صديق",
+    howHeard_other: "أخرى",
+    duo_yes_with_partner: "نعم، لدي شريك لإلقاء المحاضرة معه.",
+    duo_no_solo: "لا، سألقي المحاضرة بنفسي.",
+    duo_no_but_open: "لا، لكني منفتح على التعاون مع شخص موضوعه متوافق مع موضوعي.",
   },
 } as const;
 
@@ -461,14 +519,14 @@ export const getFieldUtils = (lang: Lang) => {
   } as const;
 
   let step = ""
-  if (lang === "EN") step = 'step'
+  if (lang === "EN") step = 'Step'
   else if (lang === "FR") step = 'Etape'
   else if (lang === "AR") step = 'خطوة'
 
   let next = ""
   if (lang === "EN") next = 'Next Step'
-  else if (lang === "FR") step = 'Etape Suivante'
-  else if (lang === "AR") step = 'الخطوة التالية'
+  else if (lang === "FR") next = 'Étape suivante'
+  else if (lang === "AR") next = 'الخطوة التالية'
 
 
   const getLabel = (fieldName: Fields) => a[fieldName].label;

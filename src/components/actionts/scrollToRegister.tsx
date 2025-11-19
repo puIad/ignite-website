@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 
+// Hook that returns a scroll-to function. Pass the target element id to scroll to.
 export const useScrollTo = () => {
   const handleClick = useCallback((elementId: string) => {
-    const element = document.getElementById('speakers-registration');
+    if (!elementId) return;
+    const element = document.getElementById(elementId);
 
     if (element) {
       element.scrollIntoView({

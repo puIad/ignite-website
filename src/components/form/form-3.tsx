@@ -10,6 +10,7 @@ import {
   getFieldUtils,
   type FullSchema,
   type SchemaPartThree,
+  uiTexts,
 } from "./schema";
 
 function FieldInfo({ field }: { field: AnyFieldApi }) {
@@ -76,28 +77,76 @@ export function FormThree() {
 
       console.log('all the data : ', fullData)
 
+      // If Arabic registration is selected, check for non-Arabic (Latin) chars
+      if (lang === "AR") {
+        const latinRe = /[A-Za-z]/;
+        const nonArabicFields: string[] = [];
+        (Object.keys(fullData) as Array<keyof FullSchema>).forEach((k) => {
+          const v = (fullData as any)[k];
+          if (typeof v === "string" && v && latinRe.test(v)) {
+            nonArabicFields.push(k as string);
+          }
+        });
+
+        if (nonArabicFields.length > 0) {
+          // mark errors for those fields and stop submit so user can correct or confirm
+          setCustomErrors((prev) => {
+            const newMap = new Map(prev);
+            nonArabicFields.forEach((f) =>
+              newMap.set(
+                f,
+                // localized warning
+                fieldsErrors.invalid(f, lang) ?? ""
+              )
+            );
+            return newMap;
+          });
+          setIsLoading(false);
+          console.warn("Detected non-Arabic characters in fields:", nonArabicFields);
+          return;
+        }
+      }
+
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         const res = await fetch("https://ignite-backend-el33.onrender.com/api/participants/register/", {
           method: "POST",
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json; charset=utf-8",
+            Accept: "application/json",
           },
           body: JSON.stringify(fullData),
         });
-        if (res.ok) {
-          setSubmission('success')
+
+        let result: any = null;
+        try {
+          result = await res.json();
+        } catch (e) {
+          // ignore json parse errors
         }
 
-        if (!res.ok) {
-          setSubmission('failure')
+        if (res.ok) {
+          setSubmission("success");
+        } else {
+          console.error("Server error:", res.status, result);
+          // if backend returns field-specific errors, map them to customErrors
+          if (result && typeof result === "object") {
+            setCustomErrors((prev) => {
+              const newMap = new Map(prev);
+              Object.entries(result).forEach(([k, v]) => {
+                newMap.set(k, typeof v === "string" ? v : JSON.stringify(v));
+              });
+              return newMap;
+            });
+          }
+          setSubmission("failure");
         }
-        const result = await res.json()
-        console.log('reponse from the api', result)
-        setIsLoading(false)
+
+        console.log("response from the api", result);
+        setIsLoading(false);
       } catch (error) {
         console.error("Submission error:", error);
-        setIsLoading(false)
+        setIsLoading(false);
       }
     },
   });
@@ -207,7 +256,7 @@ export function FormThree() {
                       onBlur={field.handleBlur}
                       className="flex flex-col gap-3 lg:gap-2 text-[14px] lg:text-[16px]"
                     >
-                      <div className="flex items-center space-x-2">
+                      <label className="flex items-center space-x-2 cursor-pointer">
                         <RadioGroupItem
                           onClick={(e) =>
                             field.handleChange(
@@ -220,9 +269,9 @@ export function FormThree() {
                           value="yes_with_partner"
                           id="option-yes-with-partner"
                         />
-                        <p>Yes, I already have a partner to do the talk with.</p>
-                      </div>
-                      <div className="flex items-center space-x-2">
+                        <span>{uiTexts[lang ?? 'EN'].duo_yes_with_partner}</span>
+                      </label>
+                      <label className="flex items-center space-x-2 cursor-pointer">
                         <RadioGroupItem
                           onClick={(e) =>
                             field.handleChange(
@@ -235,10 +284,10 @@ export function FormThree() {
                           value="no_solo"
                           id="option-no-solo"
                         />
-                        <p>No, I will lead the talk on my own.</p>
-                      </div>
+                        <span>{uiTexts[lang ?? 'EN'].duo_no_solo}</span>
+                      </label>
 
-                      <div className="flex items-center space-x-2">
+                      <label className="flex items-center space-x-2 cursor-pointer">
                         <RadioGroupItem
                           onClick={(e) =>
                             field.handleChange(
@@ -251,11 +300,10 @@ export function FormThree() {
                           value="no_but_open"
                           id="option-no-but-open"
                         />
-                        <p>
-                          No, but I am open to pairing with someone whose topic
-                          aligns with mine.
-                        </p>
-                      </div>
+                        <span>
+                          {uiTexts[lang ?? 'EN'].duo_no_but_open}
+                        </span>
+                      </label>
                     </RadioGroup>
 
                     <FieldInfo field={field} />
@@ -308,7 +356,7 @@ export function FormThree() {
                       onBlur={field.handleBlur}
                       className="flex flex-row gap-6  text-[14px] lg:text-[16px]"
                     >
-                      <div className="flex items-center space-x-2">
+                      <label className="flex items-center space-x-2 cursor-pointer">
                         <RadioGroupItem
                           onClick={(e) =>
                             field.handleChange(
@@ -318,9 +366,9 @@ export function FormThree() {
                           value="online"
                           id="option-online"
                         />
-                        <p>Online</p>
-                      </div>
-                      <div className="flex items-center space-x-2">
+                        <span>{uiTexts[lang ?? 'EN'].online}</span>
+                      </label>
+                      <label className="flex items-center space-x-2 cursor-pointer">
                         <RadioGroupItem
                           onClick={(e) =>
                             field.handleChange(
@@ -330,8 +378,8 @@ export function FormThree() {
                           value="in_person"
                           id="option-in-person"
                         />
-                        <p>In Person</p>
-                      </div>
+                        <span>{uiTexts[lang ?? 'EN'].inPerson}</span>
+                      </label>
                     </RadioGroup>
 
                     <FieldInfo field={field} />
@@ -363,10 +411,11 @@ export function FormThree() {
 
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 mt-10">
             <button
+              type="button"
               className="text-[14px] lg:text-[16px] px-4 py-2.75 lg:px-10 lg:py-3 rounded-xl lg:rounded-2xl text-bold bg-primary/5 border-primary/30 border flex gap-4 items-center text-primary font-bold uppercase"
               onClick={() => setStep(0)}
             >
-              Go Back
+              {uiTexts[lang ?? 'EN'].goBack}
               <div className="rotate-180">
                 <Arrow fill="#750B2B" />
               </div>
@@ -380,7 +429,7 @@ export function FormThree() {
                   type="submit"
                   disabled={!canSubmit}
                 >
-                  {loading ? "Sending..." : <><p>{next}</p> <Arrow /></>}
+                  {loading ? uiTexts[lang ?? 'EN'].sending : <><p>{next}</p> <Arrow /></>}
                 </button>
               )}
             />
