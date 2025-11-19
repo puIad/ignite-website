@@ -30,7 +30,7 @@ export function PreviousEditionsSection() {
                 </div>
 
                 <div className="flex flex-col gap-1 text-[14px] lg:text-[32px]">
-                  <p><span className="font-bold mr-2">250 </span><span>Attendees</span></p>
+                  <p><span className="font-bold mr-2">400 </span><span>Attendees</span></p>
                   <p><span className="font-bold mr-2">14</span><span>Speakers</span></p>
                 </div>
 
