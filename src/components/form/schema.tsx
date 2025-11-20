@@ -394,7 +394,7 @@ export const uiTexts = {
     howHeard_social_media: "Via vos réseaux sociaux",
     howHeard_friend: "Via un ami",
     howHeard_other: "Autre",
-    duo_yes_with_partner: "Oui, j'ai déjà un partenaire pour faire la présentation.",
+    duo_yes_with_partner: "Oui, j'ai déjà un binôme pour faire la présentation.",
     duo_no_solo: "Non, je présenterai seul(e).",
     duo_no_but_open: "Non, mais je suis ouvert(e) à m'associer avec quelqu'un dont le sujet est compatible.",
     submit: "Soumettre",
