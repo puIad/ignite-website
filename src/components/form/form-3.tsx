@@ -79,8 +79,6 @@ export function FormThree() {
         ...partThreeData,
       };
 
-      console.log('all the data : ', fullData)
-
       // Previously there was a validation that rejected non-Arabic (Latin) characters
       // when `lang === 'AR'`. That restriction was removed so Arabic registrations
       // may include Latin/non-Arabic characters. No action needed here.
@@ -90,43 +88,74 @@ export function FormThree() {
         setIsLoading(true);
         const API_BASE = import.meta.env.DEV ? "" : "https://ignite-backend-el33.onrender.com";
 
-        const res = await fetch(`${API_BASE}/api/participants/register/`, {
-          method: "POST",
-          mode: 'cors',
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(fullData),
-        });
-
-        let result: any = null;
         try {
-          result = await res.json();
-        } catch (e) {
-          // ignore json parse errors
-        }
-
-        if (res.ok) {
-          setSubmission("success");
-          setSubmissionError(null);
-        } else {
-          console.error("Server error:", res.status, result);
-          // if backend returns field-specific errors, map them to customErrors
-          if (result && typeof result === "object") {
-            setCustomErrors((prev) => {
-              const newMap = new Map(prev);
-              Object.entries(result).forEach(([k, v]) => {
-                newMap.set(k, typeof v === "string" ? v : JSON.stringify(v));
-              });
-              return newMap;
-            });
+          // convex call
+          const res = await fetch("https://outgoing-caribou-968.convex.cloud/api/action", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              path: "speakers:register",
+              args: { jsonString: fullData },
+              format: "json"
+            })
+          })
+          const convexRes = await res.json()
+          // console.log('convex res :', convexRes)
+          if (convexRes.status === "success") {
+            console.log('sent to convex successfully')
+            setSubmission("success");
+            setSubmissionError(null);
           }
-          const serverMessage = result && typeof result === 'object' ? JSON.stringify(result) : String(result ?? `status ${res.status}`);
-          setSubmissionError(serverMessage);
-          setSubmission("failure");
+          else {
+            const serverMessage = "Server error, please try again, or contact us at our socials."
+            setSubmissionError(serverMessage);
+            setSubmission("failure");
+          }
+        } catch (e) {
+          console.log('[CONVEX] catched error while sending to convex :', e)
         }
 
-        console.log("response from the api", result);
+        // wake up call to dajgno server
+        try {
+          const res = await fetch(`${API_BASE}/api/participants/register/`, {
+            method: "POST",
+            mode: 'cors',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(fullData),
+          });
+
+          let result: any = null;
+          try {
+            result = await res.json();
+          } catch (e) {
+          }
+        } catch (e) {
+          console.log('error waking up djanog ;', e)
+        }
+
+        // if (res.ok) {
+        //   setSubmission("success");
+        //   setSubmissionError(null);
+        // } else {
+        //   console.error("Server error:", res.status, result);
+        //   // if backend returns field-specific errors, map them to customErrors
+        //   if (result && typeof result === "object") {
+        //     setCustomErrors((prev) => {
+        //       const newMap = new Map(prev);
+        //       Object.entries(result).forEach(([k, v]) => {
+        //         newMap.set(k, typeof v === "string" ? v : JSON.stringify(v));
+        //       });
+        //       return newMap;
+        //     });
+        //   }
+        //   const serverMessage = result && typeof result === 'object' ? JSON.stringify(result) : String(result ?? `status ${res.status}`);
+        //   setSubmissionError(serverMessage);
+        //   setSubmission("failure");
+        // }
         setIsLoading(false);
       } catch (error) {
         console.error("Submission error:", error);
