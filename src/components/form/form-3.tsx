@@ -331,7 +331,7 @@ export function FormThree() {
   return (
     <div>
       <div className="flex justify-start gap-2 lg:mb-10">
-        <p className={`text-[24px] lg:text-[65px] text-primary font-display ${lang === 'AR' ? 'font-splart' : ''}`}>
+        <p className={`text-[24px] lg:text-[65px] text-primary font-display ${lang === 'AR' ? 'font-splart' : ''} uppercase`}>
           {step}
         </p>
         <p className="text-[14px] lg:text-[35px] text-primary">3/3</p>
@@ -346,7 +346,7 @@ export function FormThree() {
         className="flex justify-center"
       >
         <div>
-          <div className="flex flex-col gap-x-20 gap-y-4 w-[320px] lg:min-h-[820px] lg:w-[850px] px-3">
+          <div className="flex flex-col gap-x-20 gap-y-4 w-[320px] lg:w-[850px] px-3">
             <form.Field
               name="duo_talk_preference"
               validators={{

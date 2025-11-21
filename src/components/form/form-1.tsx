@@ -139,7 +139,7 @@ export function FormOne() {
         className="flex justfiy-center lg:justify-start"
       >
         <div className="h-full flex flex-col justify-between">
-          <div className="lg:min-h-[820px] lg:w-[850px]">
+          <div className="">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-4">
               <form.Field
                 name="first_name"
@@ -468,7 +468,7 @@ export function FormOne() {
             </div>
           </div>
 
-          <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 mt-10">
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 mt-20">
             <button
               type="button"
               className="text-[14px] lg:text-[16px] px-4 py-2.75 lg:px-10 lg:py-3 rounded-xl lg:rounded-2xl text-bold bg-primary/5 border-primary/30 border flex gap-4 items-center text-primary font-bold uppercase"

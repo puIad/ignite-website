@@ -9,9 +9,9 @@ export function LangChoser() {
   return (
     <div id="lang-choser" className="w-full flex justify-center">
       <div className="flex flex-col items-start">
-  <p className={`text-[20px] lg:text-[65px] text-primary font-bold uppercase font-display mb-5 lg:mb-10 ${lang === 'AR' ? 'font-splart' : ''}`}>{uiTexts[lang ?? 'EN'].chooseLanguage}</p>
+        <p className={`text-[20px] lg:text-[65px] text-primary font-bold uppercase font-display mb-5 lg:mb-10 ${lang === 'AR' ? 'font-splart' : ''}`}>{uiTexts[lang ?? 'EN'].chooseLanguage}</p>
 
-        <div className="w-full h-[300px] lg:h-[820px] lg:w-[850px] flex flex-col gap-4 items-start">
+        <div className="w-full lg:w-[850px] flex flex-col gap-4 items-start">
           <button
             onClick={() => {
               setLang('FR')

@@ -97,27 +97,28 @@ export function SpeakersRegistration() {
     prevStepRef.current = step;
   }, [step]);
   return (
-    <div className="relative w-full min-h-screen" id={"speakers-registration"}>
+    <div className="relative w-full" id={"speakers-registration"}>
       <img
         src="/images/noisy-red-mobile.webp"
-        className="absolute lg:hidden h-full object-cover  top-0 left-0 -z-10"
+        className="absolute lg:hidden h-full object-cover top-0 left-0 -z-10"
       />
       <img
         src="/images/noisy-red-desktop.webp"
         className="absolute hidden h-full object-cover top-0 left-0 lg:inline -z-10"
       />
 
-      <div className="w-full px-3 py-4 lg:px-20 lg:py-12 min-h-screen flex flex-col justify-between">
+      <div className="w-full px-4 py-40 lg:px-20 lg:py-20 flex flex-col justify-between">
         {/* content  */}
 
         {/* <RegistrationForm /> */}
 
         <div className="h-full flex flex-col items-center lg:justify-between gap-6 lg:gap-10">
           <p className={`text-[25px] lg:text-[65px] font-display text-primary text-center mt-10 lg:mt-0 ${lang === 'AR' ? 'font-splart' : ''}`}>
-            {uiTexts[lang ?? 'EN'].speakersRegistration}
+            {/* {uiTexts[lang ?? 'EN'].speakersRegistration} */}
+            SPEAKERS REGISTRATION
           </p>
 
-          <div id="speakers-registration-form" className="bg-primary/4 border-primary/40 border py-10 lg:py-20 backdrop-blur-3xl w-full lg:w-[1200px] xl:w-[1400px] flex justify-center">
+          <div id="speakers-registration-form" className="bg-primary/4 border-primary/40 border py-10 lg:py-20 backdrop-blur-3xl w-full transition-all duration-300 ease-out flex justify-center">
             {step === 0 && <LangChoser />}
             {step === 1 && <FormOne />}
             {step === 2 && <FormTwo />}
@@ -125,10 +126,10 @@ export function SpeakersRegistration() {
           </div>
         </div>
 
-        <div className="w-full flex justify-between lg:justify-between items-end mt-16">
-          <TimeLocationTag />
-          <Logos color="black" />
-        </div>
+      </div>
+      <div className="w-full flex justify-between lg:justify-between items-end pb-6 px-3 lg:px-20">
+        <TimeLocationTag />
+        <Logos color="black" />
       </div>
     </div>
   );

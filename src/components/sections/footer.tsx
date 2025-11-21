@@ -2,7 +2,7 @@ import { TimeLocationTag } from "../ui/time-location-tag";
 
 export function FooterSection() {
   return (
-    <div id="about-us" className="w-screen min-h-screen px-8 py-8 lg:px-20 lg:py-8 flex flex-col justify-between bg-white">
+    <div id="about-us" className="w-screen px-8 py-8 lg:px-20 lg:py-8 flex flex-col justify-between bg-white">
       <div>
         <div className="flex flex-col items-start gap-2">
           <TimeLocationTag />
@@ -33,12 +33,12 @@ A scientific club founded in 2014 at the National Polytechnic School of Algiers 
         </div>
       </div>
 
-      <div className="w-full">
+      <div className="w-full pt-10 lg:pt-40">
         <div className="h-px w-full bg-black lg:mb-4" />
-        <div className="w-full flex justify-between lg:justify-start gap-20 mb-8 mt-4 lg:mt-0 lg:mb-12">
+        <div className="flex gap-10  lg:justify-start lg:gap-20 mb-8 mt-4 lg:mt-0 lg:mb-12">
           <div className="flex flex-col gap-1 lg:gap-2 uppercase text-black font-bold text-[7px] lg:text-[12px]">
             <a href="https://www.enp.edu.dz/en/" target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:underline">NATIONAL POLYTECHNIC SCHOOL</a>
-            <a href="mailto:vic@g.enp.edu.dz" className="cursor-pointer hover:underline uppercase text-[16px]">vic@g.enp.edu.dz</a>
+            <a href="mailto:vic@g.enp.edu.dz" className="cursor-pointer hover:underline">vic@g.enp.edu.dz</a>
           </div>
           <div className="flex flex-col gap-1 lg:gap-2 uppercase text-black font-bold text-[7px] lg:text-[12px]">
             <a href="#what-is-ignite" className="cursor-pointer hover:underline">WHAT IS IGNITE®</a>

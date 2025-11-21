@@ -32,10 +32,10 @@ export function HeroSection() {
           <p className="text-[12px] font-bold uppercase">Claim your <br /> five minutes</p>
         </div>
 
-        <div className="w-full flex justify-center lg:justify-between lg:pt-40">
-          <p className="text-[20px] font-bold hidden lg:inline uppercase">Got an idea <br /> worth sharing? </p>
-          <Button size="lg">REGISTER TO SPEAK AT IGNITE</Button>
-          <p className="text-[20px] font-bold hidden lg:inline uppercase">Claim your <br /> five minutes</p>
+        <div className="w-full relative h-[60px] lg:pt-25">
+          <p className="text-[20px] font-bold hidden lg:inline uppercase absolute left-0 leading-[1.2]">Got an idea <br /> worth sharing? </p>
+          <Button size="lg" className="absolute left-1/2 -translate-x-1/2 text-nowrap">REGISTER TO SPEAK AT IGNITE</Button>
+          <p className="text-[20px] font-bold hidden lg:inline uppercase absolute right-0 leading-[1.2]">Claim your <br /> five minutes</p>
         </div>
 
         <div className="w-full flex flex-col lg:flex-row justify-center gap-[87px] lg:gap-0 lg:justify-between items:center lg:items-end">
