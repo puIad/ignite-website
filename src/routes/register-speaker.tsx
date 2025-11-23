@@ -1,25 +1,28 @@
+import { FormOne } from '@/components/form/form-1';
+import { FormTwo } from '@/components/form/form-2';
+import { FormThree } from '@/components/form/form-3';
+import { formStore } from '@/components/form/schema';
+import { Logos } from '@/components/ui/logos';
+import { createFileRoute, useRouter } from '@tanstack/react-router'
+
 import { AnimatePresence, motion } from "motion/react"
-import { FormOne } from "../form/form-1";
-import { FormTwo } from "../form/form-2";
-import { FormThree } from "../form/form-3";
-import { LangChoser } from "../form/lang-choser";
-import { formStore } from "../form/schema";
-import { Logos } from "../ui/logos";
 import { useEffect, useRef } from "react";
 
+export const Route = createFileRoute('/register-speaker')({
+  component: RouteComponent,
+})
+
+function RouteComponent() {
+  return <SpeakersRegistration section={2} />
+}
+
+
 export function SpeakersRegistration({ section }: { section: number }) {
-  const animateValue = section >= 4 ? {
-    opacity: '100%',
-    "--inner": "100%",
-    "--outer": "100%",
-  } : {
-    opacity: '0%',
-    "--inner": "30%",
-    "--outer": "60%",
-  }
   const lang = formStore((state) => state.lang);
   const step = formStore((state) => state.step);
   const setStep = formStore((state) => state.setStep);
+  const router = useRouter()
+  if (!lang) router.navigate({ to: '/' })
   if (!lang) setStep(0);
   // keep the form wrapper's lang/dir in sync with the selected language and current step
   useEffect(() => {
@@ -53,9 +56,6 @@ export function SpeakersRegistration({ section }: { section: number }) {
       wrapper.classList.remove("lang-fr");
     }
   }, [step, lang]);
-  // when the step changes, smoothly align and focus the relevant control
-  // NOTE: track previous step to avoid running on initial mount (which caused
-  // the language chooser to be focused by default).
   const prevStepRef = useRef<number | null>(null);
   useEffect(() => {
     const wrapper = document.getElementById("speakers-registration-form");
@@ -93,53 +93,27 @@ export function SpeakersRegistration({ section }: { section: number }) {
       } catch (e) {
         (first as HTMLElement).focus();
       }
-
     }
-
     prevStepRef.current = step;
   }, [step]);
   return (
-    <div className="relative flex flex-col justify-between h-dvh w-screen" id={"speakers-registration"}>
+    <div className="relative flex flex-col justify-between w-screen overflow-y-scroll" id={"speakers-registration"}>
       <motion.img
         src="/images/noisy-red-mobile.png"
         className="absolute lg:hidden h-full object-cover top-0 left-0 -z-10"
-        style={{
-          ["--inner" as any]: "30%",
-          ["--outer" as any]: "60%",
-          maskImage: "radial-gradient(circle, black var(--inner), transparent var(--outer))",
-          WebkitMaskImage: "radial-gradient(circle, black var(--inner), transparent var(--outer))",
-        }}
-        animate={animateValue}
-        transition={{
-          delay: 0,
-          duration: 2,
-          ease: "easeIn"
-        }}
       />
       <motion.img
         src="/images/noisy-red-desktop.png"
         className="absolute hidden h-full object-cover top-0 left-0 lg:inline -z-10"
-        style={{
-          ["--inner" as any]: "30%",
-          ["--outer" as any]: "60%",
-          maskImage: "radial-gradient(circle, black var(--inner), transparent var(--outer))",
-          WebkitMaskImage: "radial-gradient(circle, black var(--inner), transparent var(--outer))",
-        }}
-        animate={animateValue}
-        transition={{
-          delay: 0,
-          duration: 2,
-          ease: "easeIn"
-        }}
       />
 
       <motion.div
         initial={{ y: -30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ delay: 2, duration: 1, ease: "easeOut" }}
-        className="h-full w-full px-4 py-0 lg:px-20 lg:py-8 flex flex-col justify-start">
+        transition={{ delay: 0, duration: 1, ease: "easeOut" }}
+        className="h-full w-full px-4 py-0 lg:px-20 lg:py-8 flex flex-col justify-start overflow-y-scroll">
 
-        <div className="h-full w-full flex flex-col gap-6 lg:gap-10">
+        <div className="h-full w-full flex flex-col gap-6 lg:gap-10 overflow-y-scroll">
           <p className={`text-[41px] lg:text-[65px] font-display text-primary text-center mt-10 lg:mt-0 ${lang === 'AR' ? 'font-splart' : ''}`}>
             SPEAKERS REGISTRATION
           </p>
@@ -154,9 +128,8 @@ export function SpeakersRegistration({ section }: { section: number }) {
             >
               <div
                 id="speakers-registration-form"
-                className="bg-primary/4 border-primary/40 border h-[50vh] lg:h-[70vh] overflow-y-scroll lg:px-50 py-10 lg:py-20 backdrop-blur-3xl w-full transition-all duration-300 ease-out flex justify-center"
+                className="h-full bg-primary/4 border-primary/40 border lg:px-50 py-10 lg:py-20 backdrop-blur-3xl w-full transition-all duration-300 ease-out flex justify-center"
               >
-                {step === 0 && <LangChoser />}
                 {step === 1 && <FormOne />}
                 {step === 2 && <FormTwo />}
                 {step === 3 && <FormThree />}
@@ -166,7 +139,7 @@ export function SpeakersRegistration({ section }: { section: number }) {
         </div>
       </motion.div>
 
-      <div className="my-4" >
+      <div className="my-10" >
         <Logos color="black" />
       </div>
       {/* <div className="w-full flex justify-between lg:justify-between items-end pb-6 px-3 lg:px-20"> */}

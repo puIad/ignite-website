@@ -32,29 +32,17 @@ export function FormOne() {
 
   const form = useForm({
     defaultValues: {
-
-      email: "ahmed@gmail.com",
-      first_name: "aahmed",
-      last_name: "hassainec",
-      phone: "111111111",
-      discord_username: "ahemd124",
-      date_of_birth: "03-04-2004",
-      wilaya: "skikda",
-      is_student: ("yes" as "yes" | "no"),
-      university: "ahmed asdsf asdsf",
-      degree_and_major: "ahme asdfd",
-      occupation: "ahmedc asdfk",
-      // email: partOne.email ?? "ahmed@gmail.com",
-      // first_name: partOne.first_name ?? "aahmed",
-      // last_name: partOne.last_name ?? "hassainec",
-      // phone: partOne.phone ?? "111111111",
-      // discord_username: partOne.discord_username ?? "ahemd124",
-      // date_of_birth: partOne.date_of_birth ?? "03-04-2004",
-      // wilaya: partOne.wilaya ?? "",
-      // is_student: partOne.is_student ?? ("yes" as "yes" | "no"),
-      // university: partOne.university ?? "ahmed asdsf asdsf",
-      // degree_and_major: partOne.degree_and_major ?? "ahme asdfd",
-      // occupation: partOne.occupation ?? "ahmedc asdfk",
+      email: partOne.email ?? "",
+      first_name: partOne.first_name ?? "",
+      last_name: partOne.last_name ?? "",
+      phone: partOne.phone ?? "",
+      discord_username: partOne.discord_username ?? "",
+      date_of_birth: partOne.date_of_birth ?? "",
+      wilaya: partOne.wilaya ?? "",
+      is_student: partOne.is_student ?? ("yes" as "yes" | "no"),
+      university: partOne.university ?? "",
+      degree_and_major: partOne.degree_and_major ?? "",
+      occupation: partOne.occupation ?? "",
     },
     onSubmit: async ({ value }) => {
       if (value.is_student === "yes") {
@@ -481,16 +469,6 @@ export function FormOne() {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 mt-20">
-            <button
-              type="button"
-              className="text-[14px] lg:text-[16px] px-4 py-2.75 lg:px-10 lg:py-3 rounded-xl lg:rounded-2xl text-bold bg-primary/5 border-primary/30 border flex gap-4 items-center text-primary font-bold uppercase"
-              onClick={() => setStep(0)}
-            >
-              {uiTexts[lang ?? 'EN'].goBack}
-              <div className="rotate-180">
-                <Arrow fill="#750B2B" />
-              </div>
-            </button>
 
             <form.Subscribe
               selector={(state) => [state.canSubmit, state.isSubmitting]}

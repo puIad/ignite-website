@@ -1,9 +1,11 @@
 import { cn } from "@/lib/utils"
 import { formStore, uiTexts } from "./schema"
+import { useNavigate, useRouter } from "@tanstack/react-router"
 export function LangChoser() {
   const setLang = formStore(state => state.setLang)
   const setStep = formStore(state => state.setStep)
   const lang = formStore(state => state.lang)
+  const router = useRouter()
 
   return (
     <div>
@@ -47,7 +49,10 @@ export function LangChoser() {
             type="submit"
             disabled={!lang}
             onClick={() => {
-              if (lang) setStep(1)
+              if (lang) {
+                setStep(1)
+                router.navigate({ to: '/register-speaker' })
+              }
             }}
           >
             {uiTexts[lang ?? 'EN'].nextStep}

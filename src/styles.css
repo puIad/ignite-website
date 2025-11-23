@@ -2,7 +2,7 @@ html,
 body {
   overscroll-behavior: none;
   /* Prevent scroll chaining */
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   /* If you want to disable vertical scroll completely */
 }
 
