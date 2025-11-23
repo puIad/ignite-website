@@ -66,7 +66,7 @@ export function PreviousEditionsSection({ setSection }: { setSection: (section: 
             </div>
           </motion.div>
 
-          <div className="w-full justify-center pt-2 lg:pt-10 z-50">
+          <div className="w-full flex justify-center pt-2 lg:pt-10 z-50">
             <Button color="white z-100" onClick={() => setSection(4)}>REGISTER TO SPEAK AT IGNITE</Button>
           </div>
 
