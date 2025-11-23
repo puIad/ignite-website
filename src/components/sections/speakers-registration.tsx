@@ -1,7 +1,4 @@
 import { AnimatePresence, motion } from "motion/react"
-import { FormOne } from "../form/form-1";
-import { FormTwo } from "../form/form-2";
-import { FormThree } from "../form/form-3";
 import { LangChoser } from "../form/lang-choser";
 import { formStore } from "../form/schema";
 import { Logos } from "../ui/logos";
@@ -156,10 +153,7 @@ export function SpeakersRegistration({ section }: { section: number }) {
                 id="speakers-registration-form"
                 className="bg-primary/4 border-primary/40 border h-[50vh] lg:h-[70vh] overflow-y-scroll lg:px-50 py-10 lg:py-20 backdrop-blur-3xl w-full transition-all duration-300 ease-out flex justify-center"
               >
-                {step === 0 && <LangChoser />}
-                {step === 1 && <FormOne />}
-                {step === 2 && <FormTwo />}
-                {step === 3 && <FormThree />}
+                <LangChoser />
               </div>
             </motion.div>
           </AnimatePresence>
