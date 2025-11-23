@@ -17,7 +17,7 @@ export const Route = createFileRoute('/')({
 function App() {
   const [section, setSection] = useState(1)
   return (
-    <div className="relative flex flex-col items-center justify-center max-w-screen">
+    <div id={'main-page'} className="relative flex flex-col items-center justify-center max-w-screen">
       <HeroSection setSection={setSection} />
       <AnimatedSection index={2} section={section} setSection={setSection}>
         <WhatIsIgniteSection section={section} setSection={setSection} />

@@ -97,7 +97,9 @@ export function SpeakersRegistration({ section }: { section: number }) {
     prevStepRef.current = step;
   }, [step]);
   return (
-    <div className="relative flex flex-col justify-between w-screen overflow-y-scroll" id={"speakers-registration"}>
+    <div
+      style={{ overflowY: "scroll" }}
+      className="allow-scroll relative flex flex-col justify-between w-screen overflow-y-scroll" id={"speakers-registration"}>
       <motion.img
         src="/images/noisy-red-mobile.png"
         className="absolute lg:hidden h-full object-cover top-0 left-0 -z-10"
