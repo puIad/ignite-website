@@ -10,11 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterSpeakerRouteImport } from './routes/register-speaker'
+import { Route as BuyTicketRouteImport } from './routes/buy-ticket'
 import { Route as IndexRouteImport } from './routes/index'
 
 const RegisterSpeakerRoute = RegisterSpeakerRouteImport.update({
   id: '/register-speaker',
   path: '/register-speaker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuyTicketRoute = BuyTicketRouteImport.update({
+  id: '/buy-ticket',
+  path: '/buy-ticket',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +31,31 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/buy-ticket': typeof BuyTicketRoute
   '/register-speaker': typeof RegisterSpeakerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/buy-ticket': typeof BuyTicketRoute
   '/register-speaker': typeof RegisterSpeakerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/buy-ticket': typeof BuyTicketRoute
   '/register-speaker': typeof RegisterSpeakerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/register-speaker'
+  fullPaths: '/' | '/buy-ticket' | '/register-speaker'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/register-speaker'
-  id: '__root__' | '/' | '/register-speaker'
+  to: '/' | '/buy-ticket' | '/register-speaker'
+  id: '__root__' | '/' | '/buy-ticket' | '/register-speaker'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuyTicketRoute: typeof BuyTicketRoute
   RegisterSpeakerRoute: typeof RegisterSpeakerRoute
 }
 
@@ -56,6 +66,13 @@ declare module '@tanstack/react-router' {
       path: '/register-speaker'
       fullPath: '/register-speaker'
       preLoaderRoute: typeof RegisterSpeakerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/buy-ticket': {
+      id: '/buy-ticket'
+      path: '/buy-ticket'
+      fullPath: '/buy-ticket'
+      preLoaderRoute: typeof BuyTicketRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +87,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuyTicketRoute: BuyTicketRoute,
   RegisterSpeakerRoute: RegisterSpeakerRoute,
 }
 export const routeTree = rootRouteImport
