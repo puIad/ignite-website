@@ -47,18 +47,6 @@ export function FormThree() {
     },
     onSubmit: async ({ value }) => {
 
-      if (value.duo_talk_preference === "yes_with_partner") {
-        if (value.partner_name_and_relationship.length < 5) {
-          setCustomErrors(prev => {
-            const newMap = new Map(prev)
-            newMap.set('partner_name_and_relationship',
-              fieldsErrors.tooShort(5, 'partner_name_and_relationship', lang) ?? "")
-            return newMap
-          })
-          return;
-        }
-      }
-
       const partThreeData: SchemaPartThree = {
         duo_talk_preference: value.duo_talk_preference as
           | "yes_with_partner"

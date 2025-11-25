@@ -96,6 +96,8 @@ export function SpeakersRegistration({ section }: { section: number }) {
     }
     prevStepRef.current = step;
   }, [step]);
+  return (<div className='h-dvh w-screen'>
+  </div>)
   return (
     <div
       style={{ overflowY: "scroll" }}
