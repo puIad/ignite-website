@@ -96,6 +96,9 @@ export function SpeakersRegistration({ section }: { section: number }) {
     prevStepRef.current = step;
   }, [step]);
   return (
+    <div className="h-dvh w-screen">  </div>
+    )
+  return (
     <div className="relative flex flex-col justify-between h-dvh w-screen" id={"speakers-registration"}>
       <motion.img
         src="/images/noisy-red-mobile.png"
