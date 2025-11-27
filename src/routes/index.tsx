@@ -4,11 +4,11 @@ import { HeroSection } from '@/components/sections/hero'
 import { WhatIsIgniteSection } from '@/components/sections/what-is-ignite'
 import { PreviousEditionsSection } from '@/components/sections/previous-editions'
 import { FooterSection } from '@/components/sections/footer'
-import { SpeakersRegistration } from '@/components/sections/speakers-registration'
 import { useEffect, useState } from 'react'
 import { useMotionValue, motion, useSpring, useTransform, useVelocity, useMotionValueEvent } from 'motion/react'
 import { cn } from '@/lib/utils'
 import useIsMobile from '@/lib/hooks'
+import { BuyTicketForm } from '@/components/sections/buy-ticket-form'
 
 export const Route = createFileRoute('/')({
   component: App,
@@ -28,7 +28,7 @@ function App() {
       </AnimatedSection>
 
       <AnimatedSection index={4} section={section} setSection={setSection}>
-        <SpeakersRegistration section={section} />
+        <BuyTicketForm section={section} />
       </AnimatedSection>
 
       <AnimatedSection index={5} section={section} setSection={setSection}>
