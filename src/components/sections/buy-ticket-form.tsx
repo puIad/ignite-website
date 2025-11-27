@@ -60,7 +60,7 @@ export function BuyTicketForm({ section }: { section: number }) {
         initial={{ y: -30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ delay: 0, duration: 1, ease: "easeOut" }}
-        className="h-full w-full px-4 py-0 lg:px-20 lg:py-8 flex flex-col justify-start overflow-y-scroll">
+        className="h-full w-full px-4 py-0 lg:px-20 lg:py-8 flex flex-col justify-start">
 
         <div className="h-full w-full flex flex-col items-center lg:justify-center gap-6 lg:gap-3 overflow-y-scroll">
           <p className="text-[41px] lg:text-[65px] font-display text-primary text-center mt-10 lg:mt-0">
@@ -77,7 +77,7 @@ export function BuyTicketForm({ section }: { section: number }) {
             >
               <div
                 id="speakers-registration-form"
-                className="h-[70dvh] bg-primary/4 border-primary/40 border lg:px-60 py-10 lg:py-10 backdrop-blur-3xl w-full transition-all duration-300 ease-out flex justify-center overflow-y-scroll"
+                className="h-[70dvh] bg-primary/4 border-primary/40 border px-14 lg:px-60 py-10 lg:py-10 backdrop-blur-3xl w-full transition-all duration-300 ease-out flex justify-center overflow-y-scroll"
               >
                 <LangChoser />
               </div>

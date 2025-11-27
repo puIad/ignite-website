@@ -46,25 +46,25 @@ export function BuyTicketFormTwo() {
     }
   }
   return (
-    <div className="flex flex-col items-center justify-center gap-8 px-11">
-      <div className="flex flex-col gap-6 text-primary">
+    <div className="h-full flex flex-col items-center justify-center gap-8 px-4 lg:px-11">
+      <div className="flex flex-col gap-6 text-primary py-4">
         <button onClick={handleBuyOnline}
-          className="px-6 py-2.5 text-[18px] font-bold border-primary border uppercase hover:scale-101 hover:bg-primary/3 transition-all duration-300 ease-in-out">
+          className="px-6 py-2.5 text-[14px] lg:text-[18px] font-bold border-primary border uppercase hover:scale-101 hover:bg-primary/3 transition-all duration-300 ease-in-out">
           Buy online with your card
         </button>
         <button onClick={handleBuyOnline}
-          className="px-6 py-2.5 text-[18px] font-bold border-primary border uppercase hover:scale-101 hover:bg-primary/3 transition-all duration-300 ease-in-out">
+          className="px-6 py-2.5 text-[14px] lg:text-[18px] font-bold border-primary border uppercase hover:scale-101 hover:bg-primary/3 transition-all duration-300 ease-in-out">
           Buy from one of our stands
         </button>
       </div>
-      <div className="w-[350px] h-px bg-primary" />
-      <div>
-        <table className="w-full">
-          <thead><th className="border border-black/40 text-[20px] text-primary font-display px-3 py-3 bg-white/8">Our Points of Sales</th></thead>
+      <div className="w-full max-w-[350px] h-px bg-primary" />
+      <div className="w-full max-w-[600px] overflow-x-auto px-4">
+        <table className="w-full min-w-[300px]">
+          <thead><tr><th className="border border-black/40 text-[20px] text-primary font-display px-3 py-3 bg-white/8">Our Points of Sales</th></tr></thead>
           <tbody>
-            {pointsOfSale.map(p => <tr><td
+            {pointsOfSale.map(p => <tr key={p}><td
               className="border border-black/40 text-[16px] px-4 py-2 bg-white/1"
-              key={p}>{p}</td></tr>)}
+            >{p}</td></tr>)}
           </tbody>
         </table>
       </div>
