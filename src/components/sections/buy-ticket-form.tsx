@@ -67,22 +67,14 @@ export function BuyTicketForm({ section }: { section: number }) {
             BUY YOUR TICKET
           </p>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={step}
-              initial={{ x: 100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -100, opacity: 0 }}
-              transition={{ duration: .3 }}
-            >
-              <div
-                id="speakers-registration-form"
-                className="h-[70dvh] bg-primary/4 border-primary/40 border px-14 lg:px-60 py-10 lg:py-10 backdrop-blur-3xl w-full transition-all duration-300 ease-out flex justify-center overflow-y-scroll"
-              >
-                <LangChoser />
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          <div
+            id="speakers-registration-form"
+            className="bg-primary/4 border-primary/40 border px-14 lg:px-60 py-16 lg:py-20 backdrop-blur-3xl w-full transition-all duration-300 ease-out flex flex-col items-center justify-center gap-4"
+          >
+            <p className="text-xl lg:text-2xl text-primary text-center font-semibold">
+              Ticket Sales will open later, check back soon!
+            </p>
+          </div>
         </div>
       </motion.div>
 

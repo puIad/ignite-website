@@ -57,9 +57,11 @@ export function WhatIsIgniteSection({ section, setSection }: { section: number, 
         <div className="w-full hidden lg:iniline">
           <p className="text-black font-bold text-center text-[10px] lg:hidden mx-auto">
           </p>
+
           <div className="w-full flex justify-end">
-            <Navbar className="text-black w-auto" />
+            <Navbar className="text-black w-auto" setSection={() => { }} />
           </div>
+
         </div>
 
         <motion.div
@@ -98,7 +100,7 @@ export function WhatIsIgniteSection({ section, setSection }: { section: number, 
             </div>
 
             <div className="w-full flex justify-center lg:justify-end mt-10 lg:mt-20">
-              <Button color="red" onClick={() => setSection(4)}>REGISTER TO SPEAK AT IGNITE</Button>
+              <Button color="red" className="opacity-70 pointer-events-none">TICKET SALES COMING SOON!</Button>
             </div>
           </div>
         </motion.div>

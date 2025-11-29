@@ -67,7 +67,7 @@ export function PreviousEditionsSection({ setSection }: { setSection: (section: 
           </motion.div>
 
           <div className="w-full flex justify-center pt-2 lg:pt-10 z-50">
-            <Button color="white z-100" onClick={() => setSection(4)}>REGISTER TO SPEAK AT IGNITE</Button>
+            <Button color="white z-100" className="opacity-70 pointer-events-none">TICKET SALES COMING SOON!</Button>
           </div>
 
         </div>

@@ -48,7 +48,7 @@ export function HeroSection({ setSection }: { setSection: (section: number) => v
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="text-[20px] font-bold hidden lg:inline uppercase absolute left-0 leading-[1.2]">Got an idea <br /> worth sharing? </motion.p>
-          <Button size="lg" className="absolute left-1/2 -translate-x-1/2 text-nowrap" onClick={() => setSection(4)}>GET YOUR IGNITE TICKET NOW!</Button>
+          <Button size="lg" className="absolute left-1/2 -translate-x-1/2 text-nowrap opacity-70 pointer-events-none">TICKET SALES COMING SOON!</Button>
           <motion.p
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

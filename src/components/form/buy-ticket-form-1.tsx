@@ -29,13 +29,13 @@ export function BuyTicketFormOne() {
 
   const form = useForm({
     defaultValues: {
-      email: "ahmedhassaine432@gmail.com",
-      first_name: "ahmed",
-      last_name: "hassaine",
-      phone: "05123213",
-      how_heard: "from the internet my friend",
+      email: "",
+      first_name: "",
+      last_name: "",
+      phone: "",
+      how_heard: "",
       which_lang: "EN",
-      anything_toknow: "nothing",
+      anything_toknow: "",
       // email: partOne.email ?? "ahmed@gmail.com",
       // first_name: partOne.first_name ?? "ahmed",
       // last_name: partOne.last_name ?? "hassaine",
