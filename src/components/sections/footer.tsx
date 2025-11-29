@@ -1,7 +1,10 @@
 import { TimeLocationTag } from "../ui/time-location-tag";
 import { motion } from "motion/react"
+import { useScrollTo } from "../actionts/scrollToRegister";
+
 
 export function FooterSection() {
+  const scrollTo = useScrollTo();
   return (
     <div id="about-us" className="w-full h-full px-8 py-8 lg:px-20 lg:py-8 flex flex-col lg:justify-between bg-white">
       <motion.div
@@ -53,10 +56,10 @@ export function FooterSection() {
               <a href="mailto:vic@g.enp.edu.dz" className="cursor-pointer hover:underline">vic@g.enp.edu.dz</a>
             </div>
             <div className="flex flex-col gap-1 lg:gap-2 uppercase text-black font-bold text-[7px] lg:text-[12px]">
-              <a href="#what-is-ignite" className="cursor-pointer hover:underline">WHAT IS IGNITE®</a>
-              <a href="#previous-editions" className="cursor-pointer hover:underline">PREVIOUS EDITIONS</a>
-              <a href="#speakers-registration" className="cursor-pointer hover:underline">SPEAKERS FORM</a>
-              <a href="#about-us" className="cursor-pointer hover:underline">ABOUT US</a>
+              <button onClick={() => scrollTo("what-is-ignite")} className="cursor-pointer hover:underline text-left">WHAT IS IGNITE®</button>
+              <button onClick={() => scrollTo("previous-editions")} className="cursor-pointer hover:underline text-left">PREVIOUS EDITIONS</button>
+              <button onClick={() => scrollTo("speakers-registration")} className="cursor-pointer hover:underline text-left">SPEAKERS FORM</button>
+              <button onClick={() => scrollTo("about-us")} className="cursor-pointer hover:underline text-left">ABOUT US</button>
             </div>
             <div className="flex flex-col gap-1 lg:gap-2 uppercase text-black font-bold text-[7px] lg:text-[12px]">
               <a href="https://www.facebook.com/vic.enpa" target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:underline">FACEBOOK</a>

@@ -26,7 +26,7 @@ export function HeroSection({ setSection }: { setSection: (section: number) => v
           <div className="lg:hidden">
             <TimeLocationTag className="text-white" />
           </div>
-          <Navbar />
+          <Navbar setSection={setSection} />
           <p className="text-[14px] hidden lg:inline"></p>
         </div>
 

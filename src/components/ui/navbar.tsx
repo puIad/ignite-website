@@ -1,9 +1,7 @@
 import { cn } from "@/lib/utils";
-import { useScrollTo } from "../actionts/scrollToRegister";
 import { useState, useEffect, useRef } from "react";
 
-export function Navbar({ className }: { className?: string }) {
-  const scrollTo = useScrollTo();
+export function Navbar({ className, setSection }: { className?: string; setSection: (section: number) => void }) {
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -19,16 +17,16 @@ export function Navbar({ className }: { className?: string }) {
     return () => document.removeEventListener("click", onDocClick);
   }, [open]);
 
-  const handleNav = (id: string) => {
+  const handleNav = (section: number) => {
     setOpen(false);
-    scrollTo(id);
+    setSection(section);
   };
 
   const links = [
-    { id: "what-is-ignite", label: "what is ignite®" },
-    { id: "previous-editions", label: "previous editions" },
-    { id: "speakers-registration", label: "speakers form" },
-    { id: "about-us", label: "about us" },
+    { section: 2, label: "what is ignite®" },
+    { section: 3, label: "previous editions" },
+    { section: 4, label: "buy ticket" },
+    { section: 5, label: "about us" },
   ];
 
   return (
@@ -37,9 +35,9 @@ export function Navbar({ className }: { className?: string }) {
       <div className={cn("gap-[120px] text-white justify-center hidden lg:flex", className)}>
         {links.map((l) => (
           <button
-            key={l.id}
+            key={l.section}
             type="button"
-            onClick={() => handleNav(l.id)}
+            onClick={() => handleNav(l.section)}
             className="font-bold text-[14px] uppercase cursor-pointer hover:underline"
           >
             {l.label}
@@ -70,9 +68,9 @@ export function Navbar({ className }: { className?: string }) {
           <div className="flex flex-col p-3">
             {links.map((l) => (
               <button
-                key={l.id}
+                key={l.section}
                 type="button"
-                onClick={() => handleNav(l.id)}
+                onClick={() => handleNav(l.section)}
                 className="text-left px-3 py-2 font-bold text-[16px] uppercase hover:underline text-white"
               >
                 {l.label}
