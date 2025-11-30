@@ -31,7 +31,7 @@ function A4Component() {
     setSubmitError('')
 
     try {
-      const response = await fetch('http://localhost:3002/api/download-tickets-a4', {
+      const response = await fetch('https://fn-test-iqj6xjon4-einstein-projects.vercel.app/api/download-tickets-a4', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ function A4Component() {
       <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50">
         <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
           <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Authentication Required</h1>
-          
+
           <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-4">
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
@@ -123,7 +123,7 @@ function A4Component() {
     <div className="flex flex-col items-center justify-center min-h-screen p-4 bg-gray-50">
       <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
         <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">Print Tickets</h1>
-        
+
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-4">
           <div>
             <label htmlFor="numTickets" className="block text-sm font-medium text-gray-700 mb-2">
