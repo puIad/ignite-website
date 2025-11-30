@@ -32,7 +32,7 @@ function App() {
       </AnimatedSection>
 
       <AnimatedSection index={5} section={section} setSection={setSection}>
-        <FooterSection />
+        <FooterSection setSection={setSection} />
       </AnimatedSection>
     </div>
 

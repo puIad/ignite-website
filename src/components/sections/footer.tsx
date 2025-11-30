@@ -1,10 +1,8 @@
 import { TimeLocationTag } from "../ui/time-location-tag";
 import { motion } from "motion/react"
-import { useScrollTo } from "../actionts/scrollToRegister";
 
 
-export function FooterSection() {
-  const scrollTo = useScrollTo();
+export function FooterSection({ setSection }: { setSection: (section: number) => void }) {
   return (
     <div id="about-us" className="w-full h-full px-8 py-8 lg:px-20 lg:py-8 flex flex-col lg:justify-between bg-white">
       <motion.div
@@ -26,7 +24,7 @@ export function FooterSection() {
           <div className="flex flex-col gap-2 lg:gap-0">
             <p className="text-[18px] lg:text-[40px] font-display text-black">VISION & INNOVATION CLUB</p>
             <p className="text-[10px] lg:text-[20px] text-black lg:max-w-[650px]">
-              {` A scientific club founded in 2014 at the National Polytechnic School of Algiers under the supervision of the scientific and cultural association “EL–MAARIFA”, which aims to foster creativity, communication, and innovation among students.
+              {` A scientific club founded in 2014 at the National Polytechnic School of Algiers under the supervision of the scientific and cultural association "EL–MAARIFA", which aims to foster creativity, communication, and innovation among students.
              `}
             </p>
             <div className="flex flex-col lg:flex-row gap-3 lg:gap-10 mt-4 lg:mt-4">
@@ -56,10 +54,10 @@ export function FooterSection() {
               <a href="mailto:vic@g.enp.edu.dz" className="cursor-pointer hover:underline">vic@g.enp.edu.dz</a>
             </div>
             <div className="flex flex-col gap-1 lg:gap-2 uppercase text-black font-bold text-[7px] lg:text-[12px]">
-              <button onClick={() => scrollTo("what-is-ignite")} className="cursor-pointer hover:underline text-left">WHAT IS IGNITE®</button>
-              <button onClick={() => scrollTo("previous-editions")} className="cursor-pointer hover:underline text-left">PREVIOUS EDITIONS</button>
-              <button onClick={() => scrollTo("speakers-registration")} className="cursor-pointer hover:underline text-left">SPEAKERS FORM</button>
-              <button onClick={() => scrollTo("about-us")} className="cursor-pointer hover:underline text-left">ABOUT US</button>
+              <button onClick={() => setSection(2)} className="cursor-pointer hover:underline text-left">WHAT IS IGNITE®</button>
+              <button onClick={() => setSection(3)} className="cursor-pointer hover:underline text-left">PREVIOUS EDITIONS</button>
+              <button onClick={() => setSection(4)} className="cursor-pointer hover:underline text-left">BUY TICKET</button>
+              <button onClick={() => setSection(5)} className="cursor-pointer hover:underline text-left">ABOUT US</button>
             </div>
             <div className="flex flex-col gap-1 lg:gap-2 uppercase text-black font-bold text-[7px] lg:text-[12px]">
               <a href="https://www.facebook.com/vic.enpa" target="_blank" rel="noopener noreferrer" className="cursor-pointer hover:underline">FACEBOOK</a>

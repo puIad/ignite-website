@@ -17,6 +17,7 @@ import { Route as ScanBarcodeRouteImport } from './routes/scan-barcode'
 import { Route as PaymentSuccessRouteImport } from './routes/payment-success'
 import { Route as PaymentFailRouteImport } from './routes/payment-fail'
 import { Route as BuyTicketRouteImport } from './routes/buy-ticket'
+import { Route as A4RouteImport } from './routes/a4'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TransactionSuccessRoute = TransactionSuccessRouteImport.update({
@@ -59,6 +60,11 @@ const BuyTicketRoute = BuyTicketRouteImport.update({
   path: '/buy-ticket',
   getParentRoute: () => rootRouteImport,
 } as any)
+const A4Route = A4RouteImport.update({
+  id: '/a4',
+  path: '/a4',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -67,6 +73,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a4': typeof A4Route
   '/buy-ticket': typeof BuyTicketRoute
   '/payment-fail': typeof PaymentFailRoute
   '/payment-success': typeof PaymentSuccessRoute
@@ -78,6 +85,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a4': typeof A4Route
   '/buy-ticket': typeof BuyTicketRoute
   '/payment-fail': typeof PaymentFailRoute
   '/payment-success': typeof PaymentSuccessRoute
@@ -90,6 +98,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a4': typeof A4Route
   '/buy-ticket': typeof BuyTicketRoute
   '/payment-fail': typeof PaymentFailRoute
   '/payment-success': typeof PaymentSuccessRoute
@@ -103,6 +112,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/a4'
     | '/buy-ticket'
     | '/payment-fail'
     | '/payment-success'
@@ -114,6 +124,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/a4'
     | '/buy-ticket'
     | '/payment-fail'
     | '/payment-success'
@@ -125,6 +136,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/a4'
     | '/buy-ticket'
     | '/payment-fail'
     | '/payment-success'
@@ -137,6 +149,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  A4Route: typeof A4Route
   BuyTicketRoute: typeof BuyTicketRoute
   PaymentFailRoute: typeof PaymentFailRoute
   PaymentSuccessRoute: typeof PaymentSuccessRoute
@@ -205,6 +218,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BuyTicketRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/a4': {
+      id: '/a4'
+      path: '/a4'
+      fullPath: '/a4'
+      preLoaderRoute: typeof A4RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -217,6 +237,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  A4Route: A4Route,
   BuyTicketRoute: BuyTicketRoute,
   PaymentFailRoute: PaymentFailRoute,
   PaymentSuccessRoute: PaymentSuccessRoute,
