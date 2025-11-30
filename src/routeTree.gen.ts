@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TransactionSuccessRouteImport } from './routes/transaction-success'
 import { Route as TransactionFailRouteImport } from './routes/transaction-fail'
 import { Route as TestBuyRouteImport } from './routes/test-buy'
+import { Route as TestRouteImport } from './routes/test'
 import { Route as SubmissionSuccessRouteImport } from './routes/submission-success'
 import { Route as ScanBarcodeRouteImport } from './routes/scan-barcode'
 import { Route as PaymentSuccessRouteImport } from './routes/payment-success'
@@ -33,6 +34,11 @@ const TransactionFailRoute = TransactionFailRouteImport.update({
 const TestBuyRoute = TestBuyRouteImport.update({
   id: '/test-buy',
   path: '/test-buy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TestRoute = TestRouteImport.update({
+  id: '/test',
+  path: '/test',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SubmissionSuccessRoute = SubmissionSuccessRouteImport.update({
@@ -79,6 +85,7 @@ export interface FileRoutesByFullPath {
   '/payment-success': typeof PaymentSuccessRoute
   '/scan-barcode': typeof ScanBarcodeRoute
   '/submission-success': typeof SubmissionSuccessRoute
+  '/test': typeof TestRoute
   '/test-buy': typeof TestBuyRoute
   '/transaction-fail': typeof TransactionFailRoute
   '/transaction-success': typeof TransactionSuccessRoute
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/payment-success': typeof PaymentSuccessRoute
   '/scan-barcode': typeof ScanBarcodeRoute
   '/submission-success': typeof SubmissionSuccessRoute
+  '/test': typeof TestRoute
   '/test-buy': typeof TestBuyRoute
   '/transaction-fail': typeof TransactionFailRoute
   '/transaction-success': typeof TransactionSuccessRoute
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/payment-success': typeof PaymentSuccessRoute
   '/scan-barcode': typeof ScanBarcodeRoute
   '/submission-success': typeof SubmissionSuccessRoute
+  '/test': typeof TestRoute
   '/test-buy': typeof TestBuyRoute
   '/transaction-fail': typeof TransactionFailRoute
   '/transaction-success': typeof TransactionSuccessRoute
@@ -118,6 +127,7 @@ export interface FileRouteTypes {
     | '/payment-success'
     | '/scan-barcode'
     | '/submission-success'
+    | '/test'
     | '/test-buy'
     | '/transaction-fail'
     | '/transaction-success'
@@ -130,6 +140,7 @@ export interface FileRouteTypes {
     | '/payment-success'
     | '/scan-barcode'
     | '/submission-success'
+    | '/test'
     | '/test-buy'
     | '/transaction-fail'
     | '/transaction-success'
@@ -142,6 +153,7 @@ export interface FileRouteTypes {
     | '/payment-success'
     | '/scan-barcode'
     | '/submission-success'
+    | '/test'
     | '/test-buy'
     | '/transaction-fail'
     | '/transaction-success'
@@ -155,6 +167,7 @@ export interface RootRouteChildren {
   PaymentSuccessRoute: typeof PaymentSuccessRoute
   ScanBarcodeRoute: typeof ScanBarcodeRoute
   SubmissionSuccessRoute: typeof SubmissionSuccessRoute
+  TestRoute: typeof TestRoute
   TestBuyRoute: typeof TestBuyRoute
   TransactionFailRoute: typeof TransactionFailRoute
   TransactionSuccessRoute: typeof TransactionSuccessRoute
@@ -181,6 +194,13 @@ declare module '@tanstack/react-router' {
       path: '/test-buy'
       fullPath: '/test-buy'
       preLoaderRoute: typeof TestBuyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/test': {
+      id: '/test'
+      path: '/test'
+      fullPath: '/test'
+      preLoaderRoute: typeof TestRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/submission-success': {
@@ -243,6 +263,7 @@ const rootRouteChildren: RootRouteChildren = {
   PaymentSuccessRoute: PaymentSuccessRoute,
   ScanBarcodeRoute: ScanBarcodeRoute,
   SubmissionSuccessRoute: SubmissionSuccessRoute,
+  TestRoute: TestRoute,
   TestBuyRoute: TestBuyRoute,
   TransactionFailRoute: TransactionFailRoute,
   TransactionSuccessRoute: TransactionSuccessRoute,
