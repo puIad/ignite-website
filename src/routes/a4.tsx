@@ -31,7 +31,7 @@ function A4Component() {
     setSubmitError('')
 
     try {
-      const response = await fetch('https://fn-test-iqj6xjon4-einstein-projects.vercel.app/api/download-tickets-a4', {
+      const response = await fetch('https://fn-test-iryuu1msd-einstein-projects.vercel.app/api/download-tickets-a4', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
