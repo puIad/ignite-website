@@ -243,7 +243,7 @@ function SpeakerAction({ startTime, visitorId, speakerId, speakerStatus, votingS
   const prevVote = useQuery(api.voting.getVote, { visitorId, speakerId })
   const prevRating = prevVote?.rating ?? null
   if (!startTime) startTime = String(Date.now())
-  const countDownValue = countDown({ startTime, timeoutValue: 60 * 5 })
+  const countDownValue = countDown({ startTime, timeoutValue: 60 })
   if (speakerStatus === "SPEAKNT") {
     return <div className={cn("absolute w-full h-full flex justify-center items-center z-50 bg-black/70",)}>
       <p className='bg-black/60 border-black border-2 text-white px-5 py-2 text-[20px] font-semibold text-center'>

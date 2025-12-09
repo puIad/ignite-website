@@ -87,6 +87,9 @@ function Page() {
   // Mutation to get or create visitor and check in
   const getOrCreateVisitorAndCheckin = useMutation(api.visitors.getOrCreateVisitorAndCheckin)
 
+  // Mutation to create anonymous visitor
+  const createAnonymousVisitor = useMutation(api.visitors.createAnonymousVisitor)
+
   const addLog = (msg: string) => {
     console.log(msg)
     setLogs(prev => [...prev, `${new Date().toLocaleTimeString()}: ${msg}`])
@@ -224,6 +227,21 @@ function Page() {
     }
   }
 
+  const handleAnonymousCheckin = async () => {
+    try {
+      const result = await createAnonymousVisitor()
+      
+      setScanResult(result.barcode)
+      const websiteUrl = import.meta.env.VITE_WEBSITE_URL || ''
+      const qrUrl = `${websiteUrl}/visitor-signin/${result.magicToken}`
+      setMagicLink(qrUrl)
+      setShowQRCode(true)
+    } catch (e: any) {
+      console.error("Error creating anonymous visitor:", e)
+      setError(e.message || "Failed to create anonymous visitor")
+    }
+  }
+
   // Determine visitor display info
   const renderVisitorInfo = () => {
     if (visitor === undefined) {
@@ -334,6 +352,15 @@ function Page() {
             >
               {scanResult ? 'SCAN ANOTHER' : 'SCAN BARCODE'}
             </button>
+
+            {!scanResult && (
+              <button
+                onClick={handleAnonymousCheckin}
+                className="w-full px-6 py-4 bg-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-purple-700 transition-all transform active:scale-95"
+              >
+                GENERATOR QR CODE FOR ANONYM
+              </button>
+            )}
           </div>
         )}
 

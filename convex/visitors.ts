@@ -206,3 +206,20 @@ export const getAllVisitors = query({
     return visitors;
   }
 });
+
+export const createAnonymousVisitor = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const magicToken = crypto.randomUUID();
+    const barcode = `ANON-${Date.now()}`;
+    
+    const viewId = await ctx.db.insert("visitors", {
+      magicToken,
+      barcode,
+      guestMode: true,
+      checkedIn: true,
+    });
+
+    return { magicToken, barcode, visitorId: viewId };
+  }
+});
