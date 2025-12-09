@@ -90,6 +90,9 @@ function Page() {
   // Mutation to create anonymous visitor
   const createAnonymousVisitor = useMutation(api.visitors.createAnonymousVisitor)
 
+  // Mutation to create VIP visitor
+  const createVipVisitor = useMutation(api.visitors.createVipVisitor)
+
   const addLog = (msg: string) => {
     console.log(msg)
     setLogs(prev => [...prev, `${new Date().toLocaleTimeString()}: ${msg}`])
@@ -242,6 +245,21 @@ function Page() {
     }
   }
 
+  const handleVipCheckin = async () => {
+    try {
+      const result = await createVipVisitor()
+      
+      setScanResult(result.barcode)
+      const websiteUrl = import.meta.env.VITE_WEBSITE_URL || ''
+      const qrUrl = `${websiteUrl}/visitor-signin/${result.magicToken}`
+      setMagicLink(qrUrl)
+      setShowQRCode(true)
+    } catch (e: any) {
+      console.error("Error creating VIP visitor:", e)
+      setError(e.message || "Failed to create VIP visitor")
+    }
+  }
+
   // Determine visitor display info
   const renderVisitorInfo = () => {
     if (visitor === undefined) {
@@ -263,7 +281,15 @@ function Page() {
     // Visitor found
     return (
       <div className="w-full p-6 bg-green-50 border border-green-200 rounded-xl flex flex-col items-center gap-3">
-        <span className="text-sm text-green-600 font-medium uppercase tracking-wider">Visitor Found</span>
+        <div className="flex flex-col items-center">
+          <span className="text-sm text-green-600 font-medium uppercase tracking-wider">Visitor Found</span>
+          {visitor.isVip && (
+            <span className="px-2 py-0.5 mt-1 bg-yellow-400 text-yellow-900 text-xs font-black rounded uppercase tracking-widest shadow-sm">
+              VIP
+            </span>
+          )}
+        </div>
+        
         {visitor.guestMode ? (
           <span className="text-xl font-bold text-gray-900">Guest Mode</span>
         ) : (
@@ -354,12 +380,21 @@ function Page() {
             </button>
 
             {!scanResult && (
-              <button
-                onClick={handleAnonymousCheckin}
-                className="w-full px-6 py-4 bg-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-purple-700 transition-all transform active:scale-95"
-              >
-                GENERATOR QR CODE FOR ANONYM
-              </button>
+              <>
+                <button
+                  onClick={handleAnonymousCheckin}
+                  className="w-full px-6 py-4 bg-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-purple-700 transition-all transform active:scale-95"
+                >
+                  GENERATOR QR CODE FOR ANONYM
+                </button>
+
+                <button
+                  onClick={handleVipCheckin}
+                  className="w-full px-6 py-4 bg-yellow-500 text-white font-bold text-lg rounded-xl shadow-lg hover:bg-yellow-600 transition-all transform active:scale-95"
+                >
+                  QR CODE FOR VIP
+                </button>
+              </>
             )}
           </div>
         )}

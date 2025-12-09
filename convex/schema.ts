@@ -22,6 +22,7 @@ const schema = defineSchema({
     email: v.optional(v.string()),
     barcode: v.string(),
     guestMode: v.boolean(),
+    isVip: v.optional(v.boolean()),
     checkedIn: v.boolean()
   }).index('by_barcode', ['barcode'])
 })

@@ -223,3 +223,21 @@ export const createAnonymousVisitor = mutation({
     return { magicToken, barcode, visitorId: viewId };
   }
 });
+
+export const createVipVisitor = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const magicToken = crypto.randomUUID();
+    const barcode = `VIP-${Date.now()}`;
+    
+    const viewId = await ctx.db.insert("visitors", {
+      magicToken,
+      barcode,
+      guestMode: true,
+      isVip: true,
+      checkedIn: true,
+    });
+
+    return { magicToken, barcode, visitorId: viewId };
+  }
+});

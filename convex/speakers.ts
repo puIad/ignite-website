@@ -29,15 +29,26 @@ export const getScoreboard = query({
   handler: async (ctx) => {
     const votings = await ctx.db.query('votes').collect()
     const speakers = await ctx.db.query('speakers').collect()
+    const visitors = await ctx.db.query('visitors').collect()
+
+    const visitorVipMap = new Map<string, boolean>();
+    visitors.forEach(v => {
+      if (v.isVip) {
+        visitorVipMap.set(v._id, true);
+      }
+    });
 
     const speakerStats = new Map<string, { score: number, count: number }>()
 
     votings.forEach(vote => {
+      const isVip = visitorVipMap.get(vote.visitorId);
+      const multiplier = isVip ? 5 : 1;
+      
       const prev = speakerStats.get(vote.speakerId)
       speakerStats.set(vote.speakerId,
         {
-          score: (prev?.score ?? 0) + vote.rating,
-          count: (prev?.count ?? 0) + 1
+          score: (prev?.score ?? 0) + (vote.rating * multiplier),
+          count: (prev?.count ?? 0) + multiplier
         }
       )
     })
