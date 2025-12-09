@@ -10,12 +10,12 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    host: '0.0.0.0',
-    port: 3005,
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
-      cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem')),
-    },
+    // host: '0.0.0.0',
+    // port: 3005,
+    // https: {
+    //   key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
+    //   cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem')),
+    // },
     proxy: {
       // Proxy all requests starting with /api to the backend during development
       '/api': {
