@@ -208,7 +208,11 @@ function Page() {
   const handleReset = () => {
     setMagicLink(null)
     setShowQRCode(false)
-    startScanning()
+    if (scanResult) {
+      setScanResult(null)
+    } else {
+      startScanning()
+    }
   }
 
   const handleGetQRCode = async () => {
