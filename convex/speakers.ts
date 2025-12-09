@@ -41,9 +41,9 @@ export const getScoreboard = query({
     const speakerStats = new Map<string, { score: number, count: number }>()
 
     votings.forEach(vote => {
-      const isVip = visitorVipMap.get(vote.visitorId);
+      const isVip = visitorVipMap.get(vote.visitorId ?? "");
       const multiplier = isVip ? 5 : 1;
-      
+
       const prev = speakerStats.get(vote.speakerId)
       speakerStats.set(vote.speakerId,
         {

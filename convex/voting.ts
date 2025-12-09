@@ -5,7 +5,7 @@ export const vote = mutation({
   args: {
     speakerId: v.id('speakers'),
     rating: v.number(),
-    visitorId: v.id('visitors')
+    visitorId: v.optional(v.string())
   },
   handler: async (ctx, { speakerId, rating, visitorId }) => {
     const prevVote = await ctx.db.query('votes').filter(q =>
@@ -17,7 +17,7 @@ export const vote = mutation({
     if (prevVote) {
       ctx.db.patch(prevVote._id, { rating })
     } else {
-      await ctx.db.insert('votes', { speakerId, rating, visitorId })
+      await ctx.db.insert('votes', { speakerId, rating })
     }
   }
 })

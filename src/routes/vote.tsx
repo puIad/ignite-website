@@ -13,7 +13,7 @@ export const Route = createFileRoute('/vote')({
 
 function RouteComponent() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [visitorId, setVisitorId] = useState<null | string>(null)
+  const [visitorId, setVisitorId] = useState<null | string>('random')
   const authenticate = useMutation(api.visitors.authenticate)
 
   const speakers = useQuery(api.speakers.getSpeakers)
@@ -21,45 +21,45 @@ function RouteComponent() {
 
   const [selectedSpeaker, setSelectedSpeaker] = useState<{ id: Id<"speakers">, name: string } | null>(null)
 
-  useEffect(() => {
-    async function foo() {
-      const token = localStorage.getItem('token')
-      if (token) {
-        try {
-          const { visitorId } = await authenticate({ token })
-          if (visitorId) {
-            setVisitorId(visitorId)
-            setIsAuthenticated(true)
-          }
-        } catch (e) { }
-      }
-    }
-    foo()
-  }, [])
+  // useEffect(() => {
+  //   async function foo() {
+  //     const token = localStorage.getItem('token')
+  //     if (token) {
+  //       try {
+  //         const { visitorId } = await authenticate({ token })
+  //         if (visitorId) {
+  //           setVisitorId(visitorId)
+  //           setIsAuthenticated(true)
+  //         }
+  //       } catch (e) { }
+  //     }
+  //   }
+  //   foo()
+  // }, [])
 
   if (!speakers) {
     return <p>loading</p>
   }
 
-  if (!isAuthenticated || !visitorId)
-    return (
-      <div
-        className='flex relative flex-col items-center min-h-screen w-screen bg-[#731D37] text-black p-4 pb-20'
-        style={{
-          backgroundImage: 'url(/images/blended-image.png)',
-          backgroundRepeat: 'repeat',
-          backgroundSize: 'auto'
-        }}
-      >
-        <div className='w-full h-20 flex justify-between z-20 px-2 py-3'>
-          <img src="/logos/vic-white.svg" className='h-8' />
-          <img src="/logos/ignite-white.svg" className='h-8.5' />
-        </div>
-        <div className='flex-1 flex justify-center items-center'>
-          <p className="text-white text-[25px] uppercase italic text-center">There is a problem, please contact a member of the organization team to fix it.</p>
-        </div>
-      </div>
-    )
+  // if (!isAuthenticated || !visitorId)
+  //   return (
+  //     <div
+  //       className='flex relative flex-col items-center min-h-screen w-screen bg-[#731D37] text-black p-4 pb-20'
+  //       style={{
+  //         backgroundImage: 'url(/images/blended-image.png)',
+  //         backgroundRepeat: 'repeat',
+  //         backgroundSize: 'auto'
+  //       }}
+  //     >
+  //       <div className='w-full h-20 flex justify-between z-20 px-2 py-3'>
+  //         <img src="/logos/vic-white.svg" className='h-8' />
+  //         <img src="/logos/ignite-white.svg" className='h-8.5' />
+  //       </div>
+  //       <div className='flex-1 flex justify-center items-center'>
+  //         <p className="text-white text-[25px] uppercase italic text-center">There is a problem, please contact a member of the organization team to fix it.</p>
+  //       </div>
+  //     </div>
+  //   )
 
 
   return (
@@ -130,7 +130,7 @@ function RouteComponent() {
   )
 }
 
-function VotePopup({ speakerName, onClose, onVote }: { speakerId: Id<"speakers">, speakerName: string, onClose: () => void, onVote: (rating: number) => Promise<void> }) {
+function VotePopup({ speakerId, speakerName, onClose, onVote }: { speakerId: Id<"speakers">, speakerName: string, onClose: () => void, onVote: (rating: number) => Promise<void> }) {
   const [integerPart, setIntegerPart] = useState(5)
   const [decimalPart, setDecimalPart] = useState(5)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -159,10 +159,12 @@ function VotePopup({ speakerName, onClose, onVote }: { speakerId: Id<"speakers">
     setIsSubmitting(true)
     try {
       await onVote(rating)
+      localStorage.setItem(speakerId, String(rating))
     } catch (e) {
       console.error("Failed to vote", e)
       setIsSubmitting(false)
     }
+    setIsSubmitting(false)
   }
   useEffect(() => {
     integerRef.current?.focus()
@@ -241,7 +243,7 @@ function VotePopup({ speakerName, onClose, onVote }: { speakerId: Id<"speakers">
 
 function SpeakerAction({ startTime, visitorId, speakerId, speakerStatus, votingStatus }: { startTime: string | undefined, speakerId: string, visitorId: string, speakerStatus: string, votingStatus: string }) {
   const prevVote = useQuery(api.voting.getVote, { visitorId, speakerId })
-  const prevRating = prevVote?.rating ?? null
+  const prevRating = prevVote?.rating ?? (Number(localStorage.getItem(speakerId)) ?? null)
   if (!startTime) startTime = String(Date.now())
   const countDownValue = countDown({ startTime, timeoutValue: 60 })
   if (speakerStatus === "SPEAKNT") {

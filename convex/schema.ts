@@ -14,7 +14,7 @@ const schema = defineSchema({
   }),
   votes: defineTable({
     speakerId: v.id('speakers'),
-    visitorId: v.id('visitors'),
+    visitorId: v.optional(v.id('visitors')),
     rating: v.number()
   }).index('by_speakerId', ['speakerId']),
 
