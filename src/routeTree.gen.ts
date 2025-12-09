@@ -9,18 +9,27 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VoteRouteImport } from './routes/vote'
 import { Route as TransactionSuccessRouteImport } from './routes/transaction-success'
 import { Route as TransactionFailRouteImport } from './routes/transaction-fail'
-import { Route as TestBuyRouteImport } from './routes/test-buy'
-import { Route as TestRouteImport } from './routes/test'
 import { Route as SubmissionSuccessRouteImport } from './routes/submission-success'
+import { Route as SpeakersScoreboardRouteImport } from './routes/speakers-scoreboard'
 import { Route as ScanBarcodeRouteImport } from './routes/scan-barcode'
 import { Route as PaymentSuccessRouteImport } from './routes/payment-success'
 import { Route as PaymentFailRouteImport } from './routes/payment-fail'
 import { Route as BuyTicketRouteImport } from './routes/buy-ticket'
 import { Route as A4RouteImport } from './routes/a4'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as VisitorSigninMagicTokenRouteImport } from './routes/visitor-signin.$magicToken'
+import { Route as AdminCheckinStatsRouteImport } from './routes/admin/checkin-stats'
+import { Route as AdminCheckinScanRouteImport } from './routes/admin/checkin-scan'
 
+const VoteRoute = VoteRouteImport.update({
+  id: '/vote',
+  path: '/vote',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TransactionSuccessRoute = TransactionSuccessRouteImport.update({
   id: '/transaction-success',
   path: '/transaction-success',
@@ -31,19 +40,14 @@ const TransactionFailRoute = TransactionFailRouteImport.update({
   path: '/transaction-fail',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TestBuyRoute = TestBuyRouteImport.update({
-  id: '/test-buy',
-  path: '/test-buy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TestRoute = TestRouteImport.update({
-  id: '/test',
-  path: '/test',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SubmissionSuccessRoute = SubmissionSuccessRouteImport.update({
   id: '/submission-success',
   path: '/submission-success',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpeakersScoreboardRoute = SpeakersScoreboardRouteImport.update({
+  id: '/speakers-scoreboard',
+  path: '/speakers-scoreboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ScanBarcodeRoute = ScanBarcodeRouteImport.update({
@@ -76,6 +80,26 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisitorSigninMagicTokenRoute = VisitorSigninMagicTokenRouteImport.update({
+  id: '/visitor-signin/$magicToken',
+  path: '/visitor-signin/$magicToken',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCheckinStatsRoute = AdminCheckinStatsRouteImport.update({
+  id: '/admin/checkin-stats',
+  path: '/admin/checkin-stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminCheckinScanRoute = AdminCheckinScanRouteImport.update({
+  id: '/admin/checkin-scan',
+  path: '/admin/checkin-scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -84,11 +108,15 @@ export interface FileRoutesByFullPath {
   '/payment-fail': typeof PaymentFailRoute
   '/payment-success': typeof PaymentSuccessRoute
   '/scan-barcode': typeof ScanBarcodeRoute
+  '/speakers-scoreboard': typeof SpeakersScoreboardRoute
   '/submission-success': typeof SubmissionSuccessRoute
-  '/test': typeof TestRoute
-  '/test-buy': typeof TestBuyRoute
   '/transaction-fail': typeof TransactionFailRoute
   '/transaction-success': typeof TransactionSuccessRoute
+  '/vote': typeof VoteRoute
+  '/admin/checkin-scan': typeof AdminCheckinScanRoute
+  '/admin/checkin-stats': typeof AdminCheckinStatsRoute
+  '/visitor-signin/$magicToken': typeof VisitorSigninMagicTokenRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -97,11 +125,15 @@ export interface FileRoutesByTo {
   '/payment-fail': typeof PaymentFailRoute
   '/payment-success': typeof PaymentSuccessRoute
   '/scan-barcode': typeof ScanBarcodeRoute
+  '/speakers-scoreboard': typeof SpeakersScoreboardRoute
   '/submission-success': typeof SubmissionSuccessRoute
-  '/test': typeof TestRoute
-  '/test-buy': typeof TestBuyRoute
   '/transaction-fail': typeof TransactionFailRoute
   '/transaction-success': typeof TransactionSuccessRoute
+  '/vote': typeof VoteRoute
+  '/admin/checkin-scan': typeof AdminCheckinScanRoute
+  '/admin/checkin-stats': typeof AdminCheckinStatsRoute
+  '/visitor-signin/$magicToken': typeof VisitorSigninMagicTokenRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -111,11 +143,15 @@ export interface FileRoutesById {
   '/payment-fail': typeof PaymentFailRoute
   '/payment-success': typeof PaymentSuccessRoute
   '/scan-barcode': typeof ScanBarcodeRoute
+  '/speakers-scoreboard': typeof SpeakersScoreboardRoute
   '/submission-success': typeof SubmissionSuccessRoute
-  '/test': typeof TestRoute
-  '/test-buy': typeof TestBuyRoute
   '/transaction-fail': typeof TransactionFailRoute
   '/transaction-success': typeof TransactionSuccessRoute
+  '/vote': typeof VoteRoute
+  '/admin/checkin-scan': typeof AdminCheckinScanRoute
+  '/admin/checkin-stats': typeof AdminCheckinStatsRoute
+  '/visitor-signin/$magicToken': typeof VisitorSigninMagicTokenRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -126,11 +162,15 @@ export interface FileRouteTypes {
     | '/payment-fail'
     | '/payment-success'
     | '/scan-barcode'
+    | '/speakers-scoreboard'
     | '/submission-success'
-    | '/test'
-    | '/test-buy'
     | '/transaction-fail'
     | '/transaction-success'
+    | '/vote'
+    | '/admin/checkin-scan'
+    | '/admin/checkin-stats'
+    | '/visitor-signin/$magicToken'
+    | '/admin'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -139,11 +179,15 @@ export interface FileRouteTypes {
     | '/payment-fail'
     | '/payment-success'
     | '/scan-barcode'
+    | '/speakers-scoreboard'
     | '/submission-success'
-    | '/test'
-    | '/test-buy'
     | '/transaction-fail'
     | '/transaction-success'
+    | '/vote'
+    | '/admin/checkin-scan'
+    | '/admin/checkin-stats'
+    | '/visitor-signin/$magicToken'
+    | '/admin'
   id:
     | '__root__'
     | '/'
@@ -152,11 +196,15 @@ export interface FileRouteTypes {
     | '/payment-fail'
     | '/payment-success'
     | '/scan-barcode'
+    | '/speakers-scoreboard'
     | '/submission-success'
-    | '/test'
-    | '/test-buy'
     | '/transaction-fail'
     | '/transaction-success'
+    | '/vote'
+    | '/admin/checkin-scan'
+    | '/admin/checkin-stats'
+    | '/visitor-signin/$magicToken'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -166,15 +214,26 @@ export interface RootRouteChildren {
   PaymentFailRoute: typeof PaymentFailRoute
   PaymentSuccessRoute: typeof PaymentSuccessRoute
   ScanBarcodeRoute: typeof ScanBarcodeRoute
+  SpeakersScoreboardRoute: typeof SpeakersScoreboardRoute
   SubmissionSuccessRoute: typeof SubmissionSuccessRoute
-  TestRoute: typeof TestRoute
-  TestBuyRoute: typeof TestBuyRoute
   TransactionFailRoute: typeof TransactionFailRoute
   TransactionSuccessRoute: typeof TransactionSuccessRoute
+  VoteRoute: typeof VoteRoute
+  AdminCheckinScanRoute: typeof AdminCheckinScanRoute
+  AdminCheckinStatsRoute: typeof AdminCheckinStatsRoute
+  VisitorSigninMagicTokenRoute: typeof VisitorSigninMagicTokenRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vote': {
+      id: '/vote'
+      path: '/vote'
+      fullPath: '/vote'
+      preLoaderRoute: typeof VoteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/transaction-success': {
       id: '/transaction-success'
       path: '/transaction-success'
@@ -189,25 +248,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TransactionFailRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/test-buy': {
-      id: '/test-buy'
-      path: '/test-buy'
-      fullPath: '/test-buy'
-      preLoaderRoute: typeof TestBuyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/test': {
-      id: '/test'
-      path: '/test'
-      fullPath: '/test'
-      preLoaderRoute: typeof TestRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/submission-success': {
       id: '/submission-success'
       path: '/submission-success'
       fullPath: '/submission-success'
       preLoaderRoute: typeof SubmissionSuccessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/speakers-scoreboard': {
+      id: '/speakers-scoreboard'
+      path: '/speakers-scoreboard'
+      fullPath: '/speakers-scoreboard'
+      preLoaderRoute: typeof SpeakersScoreboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/scan-barcode': {
@@ -252,6 +304,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visitor-signin/$magicToken': {
+      id: '/visitor-signin/$magicToken'
+      path: '/visitor-signin/$magicToken'
+      fullPath: '/visitor-signin/$magicToken'
+      preLoaderRoute: typeof VisitorSigninMagicTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/checkin-stats': {
+      id: '/admin/checkin-stats'
+      path: '/admin/checkin-stats'
+      fullPath: '/admin/checkin-stats'
+      preLoaderRoute: typeof AdminCheckinStatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/checkin-scan': {
+      id: '/admin/checkin-scan'
+      path: '/admin/checkin-scan'
+      fullPath: '/admin/checkin-scan'
+      preLoaderRoute: typeof AdminCheckinScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -262,11 +342,15 @@ const rootRouteChildren: RootRouteChildren = {
   PaymentFailRoute: PaymentFailRoute,
   PaymentSuccessRoute: PaymentSuccessRoute,
   ScanBarcodeRoute: ScanBarcodeRoute,
+  SpeakersScoreboardRoute: SpeakersScoreboardRoute,
   SubmissionSuccessRoute: SubmissionSuccessRoute,
-  TestRoute: TestRoute,
-  TestBuyRoute: TestBuyRoute,
   TransactionFailRoute: TransactionFailRoute,
   TransactionSuccessRoute: TransactionSuccessRoute,
+  VoteRoute: VoteRoute,
+  AdminCheckinScanRoute: AdminCheckinScanRoute,
+  AdminCheckinStatsRoute: AdminCheckinStatsRoute,
+  VisitorSigninMagicTokenRoute: VisitorSigninMagicTokenRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
