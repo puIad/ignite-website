@@ -1,0 +1,13 @@
+# ignite-website
+
+> Website for Ignite Algiers 2025. Ticket purchase with payment result pages, visitor magic-link sign-in, barcode scanning for check-in, speaker voting with a live scoreboard, and an admin area. React, TanStack Router, Convex, Vite.
+
+## Docs
+
+- [README.md](https://github.com/puIad/ignite-website/blob/main/README.md): stack, scripts and routing
+- [VOTING.md](https://github.com/puIad/ignite-website/blob/main/VOTING.md): voting phases
+
+## Source
+
+- [src/routes](https://github.com/puIad/ignite-website/tree/main/src/routes): pages: buy-ticket, scan-barcode, vote, speakers-scoreboard, admin
+- [convex](https://github.com/puIad/ignite-website/tree/main/convex): backend: schema, speakers, visitors, voting
